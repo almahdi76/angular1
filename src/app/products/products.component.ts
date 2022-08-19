@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../model/product.model';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -7,8 +8,8 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products!:Array<any>;
- errorMessager!:Array<any>;
+  products!:Array<Product>;
+ errorMessager!:Array<Product>;
 
   constructor(private productService:ProductService) { }
 
@@ -23,7 +24,7 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  handleDeleteProduct(p:any){
+  handleDeleteProduct(p:Product){
     let index=this.products.indexOf(p);
     this.products.splice(index,1);
   }
