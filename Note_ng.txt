@@ -1,0 +1,92 @@
+https://www.youtube.com/watch?v=d3eGRvfVq2s&list=PLxr551TUsmAo457BgKV4dTzF__SUS5knW&index=2
+
+ng new monApp
+ng serve
+
+generation components
+	ng generate component  Products || g c Products
+ng install --save bootstrap  bootstrap-icons
+
+styles.css  >@import "~bootstrap/dist/css/bootstrap.min.css";  Or
+Angular.json -->	"node_modules/bootstrap/dist/css/bootstrap.min.css" && "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+
+app-routing
+	const routes: Routes = [
+{path:"products",component:ProductsComponent},		import { CustomersComponent } from './customers/customers.component';
+{path:"customers",component:CustomerComponent}]
+
+html -->href="#" ==== routerLink="/products"   fin <router-outlet></router-outlet>
+
+products.component.ts
+	export class ProductsComponent implements OnInit {
+Products!:Array<any>;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  this.Products=[
+  {id:1,name:"LG 12",price:255}
+  ]
+html 		<tr *ngFor="let p of Products">
+            <td>{{p.id}}</td>
+
+Delete
+<button (click)="handleDeleteProduct(p)" class="btn btn-danger">
+products.component===class
+	handleDeleteProduct(p:any){
+  let index=this.Products.indexOf(p);
+  this.Products.splice(index,1);
+  }
+
+======== travaille avec Service  ===	ng g s services/produit
+class ProductService -->
+	private product!:Array<any>;
+	Constractor mettre list
+	
+	dans component inject ProductService comme param ===>	constructor(private productService:ProductService) { }
+	
+	  ngOnInit(): void {
+   this.products=this.productService.getAllProducts();
+  }
+  
+  
+  changement
+   public getAllProducts():Observable<Array<any>>{
+    return of(this.products);
+   }
+   
+			errorMessager!:Array<any>;
+     ngOnInit(): void {
+   this.productService.getAllProducts().subscribe({
+    next:(data)=>{
+      this.products=data;
+    },error:(err)=>{
+      this.errorMessager=err;
+    }
+   });
+  }
+  
+  HTML soit
+  div *ngIf="errorMessager" class="text-danger"
+  
+  soit
+  
+  
+  ==========  Provoquer une error===========
+     public getAllProducts():Observable<Array<any>>{
+	 
+		let rd=Math.random();
+		if(rd<0.5) returb throwError(()=>{" pas de ..."}
+		else return of(this.products);
+   }
+   
+   Model
+   interface product
+   changer any par product
+	 public getAllProducts():Observable<Product[]>{  // || Array<Product>
+	 
+	 
+   
+
+
+
